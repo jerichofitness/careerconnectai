@@ -1,0 +1,4651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareerConnect AI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#1f2937;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    height:70px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+    color:#4f46e5;
+}
+
+.logo span{
+    color:#111827;
+}
+
+.nav-user{
+    color:#6b7280;
+    font-size:14px;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    min-height:calc(100vh - 70px);
+}
+
+.center-page{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-card{
+    width:420px;
+    max-width:100%;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.login-card h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#6b7280;
+    margin-bottom:28px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:600;
+    font-size:14px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#6366f1;
+    box-shadow:0 0 0 3px rgba(99,102,241,.1);
+}
+
+.primary-btn{
+    width:100%;
+    border:none;
+    padding:13px;
+    border-radius:10px;
+    background:#4f46e5;
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    background:#4338ca;
+}
+
+.demo-btn{
+    width:100%;
+    margin-top:12px;
+    padding:12px;
+    border-radius:10px;
+    background:#eef2ff;
+    color:#4338ca;
+    border:1px solid #c7d2fe;
+    font-weight:600;
+}
+
+.password-note{
+    font-size:12px;
+    color:#6b7280;
+    margin-top:6px;
+}
+
+
+/* =========================
+   LOGIN LOADING
+========================= */
+
+.login-loading{
+    text-align:center;
+    padding:30px 0;
+}
+
+.login-spinner{
+    width:55px;
+    height:55px;
+    border:5px solid #e5e7eb;
+    border-top:5px solid #4f46e5;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 25px;
+}
+
+.login-success-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#dcfce7;
+    color:#16834d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:35px;
+    font-weight:bold;
+    margin:0 auto 20px;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+.hero{
+    padding:70px 7%;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #eef2ff,
+        #f5f3ff
+    );
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#4f46e5;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#6b7280;
+    line-height:1.7;
+}
+
+.section{
+    padding:45px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.career-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.career-card{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.career-card:hover{
+    transform:translateY(-5px);
+}
+
+.career-icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.career-card h3{
+    margin-bottom:10px;
+}
+
+.career-card p{
+    color:#6b7280;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.small-btn{
+    border:none;
+    background:#4f46e5;
+    color:white;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+
+/* =========================
+   WIZARD
+========================= */
+
+.wizard-container{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px 50px;
+}
+
+.progress{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:35px;
+}
+
+.progress-step{
+    flex:1;
+    text-align:center;
+    color:#9ca3af;
+    font-size:13px;
+}
+
+.progress-step.active{
+    color:#4f46e5;
+    font-weight:bold;
+}
+
+.wizard-card{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,.07);
+}
+
+.wizard-card h2{
+    margin-bottom:8px;
+}
+
+.wizard-card .description{
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.option-card{
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option-card:hover{
+    border-color:#818cf8;
+}
+
+.option-card input{
+    width:auto;
+    margin-right:8px;
+}
+
+.option-card strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.option-card small{
+    color:#6b7280;
+}
+
+
+/* =========================
+   MULTIPLE STREAMS
+========================= */
+
+.stream-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.stream-option{
+    border:1px solid #d1d5db;
+    padding:14px;
+    border-radius:10px;
+    cursor:pointer;
+    background:white;
+    transition:.2s;
+}
+
+.stream-option:hover{
+    border-color:#6366f1;
+    background:#f5f3ff;
+}
+
+.stream-option input{
+    width:auto;
+    margin-right:8px;
+}
+
+.selected-box{
+    margin-top:18px;
+    padding:14px;
+    background:#f5f3ff;
+    border-radius:10px;
+    min-height:45px;
+}
+
+.stream-tag{
+    display:inline-block;
+    background:#4f46e5;
+    color:white;
+    padding:5px 9px;
+    border-radius:15px;
+    margin:3px;
+    font-size:12px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.wizard-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+}
+
+.back-btn{
+    flex:1;
+    border:1px solid #d1d5db;
+    background:white;
+    padding:13px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.next-btn{
+    flex:2;
+    border:none;
+    background:#4f46e5;
+    color:white;
+    padding:13px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-box{
+    border:2px dashed #a5b4fc;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    background:#f8f7ff;
+}
+
+.upload-box input{
+    margin-top:15px;
+    border:none;
+}
+
+
+/* =========================
+   ANALYSIS
+========================= */
+
+.analysis{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.analysis-spinner{
+    width:70px;
+    height:70px;
+    border:6px solid #e5e7eb;
+    border-top:6px solid #4f46e5;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:0 auto 25px;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+.results-container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px 60px;
+}
+
+.profile-summary{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.summary-item{
+    background:#f9fafb;
+    padding:15px;
+    border-radius:10px;
+}
+
+.summary-item small{
+    display:block;
+    color:#6b7280;
+    margin-bottom:5px;
+}
+
+.job-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.job-card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.job-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.job-card h3{
+    margin-bottom:7px;
+}
+
+.company{
+    color:#6b7280;
+}
+
+.match{
+    background:#dcfce7;
+    color:#15803d;
+    padding:7px 10px;
+    border-radius:20px;
+    font-weight:bold;
+    height:max-content;
+}
+
+.job-info{
+    margin:18px 0;
+    color:#6b7280;
+    line-height:1.7;
+}
+
+.job-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.job-buttons button{
+    flex:1;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:200;
+}
+
+.modal-card{
+    background:white;
+    width:650px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    padding:30px;
+    border-radius:20px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.close{
+    border:none;
+    background:#f3f4f6;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:20px;
+}
+
+.why-box{
+    margin-top:20px;
+    padding:20px;
+    background:#f9fafb;
+    border-radius:12px;
+}
+
+.why-box h4{
+    margin-bottom:10px;
+}
+
+.skill{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:15px;
+    margin:4px;
+    font-size:12px;
+}
+
+.skill.good{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.skill.missing{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-card{
+    max-width:650px;
+    margin:60px auto;
+    background:white;
+    padding:45px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.07);
+}
+
+.success-icon{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#dcfce7;
+    color:#15803d;
+    font-size:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+}
+
+.email-message{
+    margin-top:20px;
+    padding:15px;
+    background:#f3f4f6;
+    border-radius:10px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#6b7280;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .career-grid,
+    .job-grid{
+        grid-template-columns:1fr;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .option-grid,
+    .stream-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .nav-user{
+        display:none;
+    }
+
+    .login-card,
+    .wizard-card{
+        padding:25px;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+<div class="logo">
+    CareerConnect <span>AI</span>
+</div>
+
+<div class="nav-user" id="navUser">
+    Guest
+</div>
+
+</nav>
+
+
+<!-- =========================
+     LOGIN PAGE
+========================= -->
+
+<section
+    id="loginPage"
+    class="page center-page"
+>
+
+<div
+    class="login-card"
+    id="loginBox"
+>
+
+<h1>
+    Welcome 👋
+</h1>
+
+<p class="subtitle">
+    Find the right career opportunity with AI
+</p>
+
+
+<div class="form-group">
+
+<label>
+    Email
+</label>
+
+<input
+    type="email"
+    id="loginEmail"
+    placeholder="Enter your email"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    Password
+</label>
+
+<input
+    type="password"
+    id="loginPassword"
+    placeholder="Enter password"
+>
+
+<p class="password-note">
+    Minimum 8 characters, uppercase, lowercase,
+    number and symbol.
+</p>
+
+</div>
+
+
+<button
+    class="primary-btn"
+    onclick="login()"
+>
+    Login
+</button>
+
+
+<button
+    class="demo-btn"
+    onclick="demoLogin()"
+>
+    Try Demo Login
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     HOME PAGE
+========================= -->
+
+<section
+    id="homePage"
+    class="page hidden"
+>
+
+<div class="hero">
+
+<h1>
+    Build Your <span>Career</span> With AI
+</h1>
+
+<p>
+    CareerConnect AI helps students, professionals and
+    career changers find suitable job opportunities based
+    on their skills, education and career goals.
+</p>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+
+<h2>
+    What are you looking for?
+</h2>
+
+<p style="color:#6b7280;margin-top:8px;">
+    Choose your current career situation
+</p>
+
+</div>
+
+
+<div class="career-grid">
+
+
+<div class="career-card">
+
+<div class="career-icon">
+    🎓
+</div>
+
+<h3>
+    Student / Fresher
+</h3>
+
+<p>
+    Find internships and entry-level jobs
+    based on your skills and education.
+</p>
+
+<button
+    class="small-btn"
+    onclick="selectCareer('Student / Fresher')"
+>
+    Choose
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">
+    💼
+</div>
+
+<h3>
+    Working Professional
+</h3>
+
+<p>
+    Find better opportunities based on
+    your existing experience and skills.
+</p>
+
+<button
+    class="small-btn"
+    onclick="selectCareer('Working Professional')"
+>
+    Choose
+</button>
+
+</div>
+
+
+<div class="career-card">
+
+<div class="career-icon">
+    🔄
+</div>
+
+<h3>
+    Career Change
+</h3>
+
+<p>
+    Explore a new career path and discover
+    the skills you need to learn.
+</p>
+
+<button
+    class="small-btn"
+    onclick="selectCareer('Career Change')"
+>
+    Choose
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     WIZARD
+========================= -->
+
+<section
+    id="wizardPage"
+    class="page hidden"
+>
+
+<div class="wizard-container">
+
+
+<div class="progress">
+
+<div
+    class="progress-step active"
+    id="p1"
+>
+    1. Resume
+</div>
+
+<div
+    class="progress-step"
+    id="p2"
+>
+    2. Opportunity
+</div>
+
+<div
+    class="progress-step"
+    id="p3"
+>
+    3. Details
+</div>
+
+</div>
+
+
+<!-- =========================
+     STEP 1
+========================= -->
+
+<div
+    id="step1"
+    class="wizard-card"
+>
+
+<h2>
+    Upload Your Resume
+</h2>
+
+<p class="description">
+    Upload your resume so CareerConnect AI can understand
+    your skills and experience.
+</p>
+
+
+<div class="upload-box">
+
+<div style="font-size:40px;">
+    📄
+</div>
+
+<h3>
+    Upload Resume
+</h3>
+
+<p style="color:#6b7280;margin-top:8px;">
+    PDF, DOC or DOCX
+</p>
+
+<input
+    type="file"
+    id="resume"
+    accept=".pdf,.doc,.docx"
+>
+
+<p
+    id="resumeName"
+    style="
+    margin-top:12px;
+    color:#4f46e5;
+    font-weight:600;
+    "
+>
+</p>
+
+</div>
+
+
+<div class="wizard-buttons">
+
+<button
+    class="next-btn"
+    onclick="nextStep(1)"
+>
+    Continue
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     STEP 2
+========================= -->
+
+<div
+    id="step2"
+    class="wizard-card hidden"
+>
+
+<h2>
+    What opportunity do you want?
+</h2>
+
+<p class="description">
+    Select the type of opportunity and one or more
+    technologies you are interested in.
+</p>
+
+
+<h3 style="margin-bottom:12px;">
+    Opportunity Type
+</h3>
+
+
+<div class="option-grid">
+
+
+<label class="option-card">
+
+<input
+    type="radio"
+    name="jobType"
+    value="Full-time"
+>
+
+<strong>
+    Full-time
+</strong>
+
+<small>
+    Permanent job
+</small>
+
+</label>
+
+
+<label class="option-card">
+
+<input
+    type="radio"
+    name="jobType"
+    value="Part-time"
+>
+
+<strong>
+    Part-time
+</strong>
+
+<small>
+    Flexible work
+</small>
+
+</label>
+
+
+<label class="option-card">
+
+<input
+    type="radio"
+    name="jobType"
+    value="Internship"
+>
+
+<strong>
+    Internship
+</strong>
+
+<small>
+    Learn and gain experience
+</small>
+
+</label>
+
+
+<label class="option-card">
+
+<input
+    type="radio"
+    name="jobType"
+    value="Any"
+>
+
+<strong>
+    Any
+</strong>
+
+<small>
+    Show all suitable opportunities
+</small>
+
+</label>
+
+</div>
+
+
+<h3 style="margin:28px 0 12px;">
+    Technology / Stream
+</h3>
+
+<p style="color:#6b7280;margin-bottom:15px;">
+    You can select <b>one or more</b>.
+</p>
+
+
+<div class="stream-grid">
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="Python"
+    onchange="updateStreamSelection()"
+>
+
+Python
+
+</label>
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="Java"
+    onchange="updateStreamSelection()"
+>
+
+Java
+
+</label>
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="C++"
+    onchange="updateStreamSelection()"
+>
+
+C++
+
+</label>
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="Web Development"
+    onchange="updateStreamSelection()"
+>
+
+Web Development
+
+</label>
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="AI/ML"
+    onchange="updateStreamSelection()"
+>
+
+AI/ML
+
+</label>
+
+
+<label class="stream-option">
+
+<input
+    type="checkbox"
+    name="stream"
+    value="Not Sure"
+    onchange="updateStreamSelection()"
+>
+
+Not Sure
+
+</label>
+
+</div>
+
+
+<div class="selected-box">
+
+<b>
+    Selected technologies:
+</b>
+
+<div id="selectedStreams">
+    None selected
+</div>
+
+</div>
+
+
+<div class="wizard-buttons">
+
+<button
+    class="back-btn"
+    onclick="showStep(1)"
+>
+    Back
+</button>
+
+<button
+    class="next-btn"
+    onclick="nextStep(2)"
+>
+    Continue
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     STEP 3
+========================= -->
+
+<div
+    id="step3"
+    class="wizard-card hidden"
+>
+
+<h2>
+    Your Details
+</h2>
+
+<p class="description">
+    Tell us about yourself so we can improve
+    your job recommendations.
+</p>
+
+
+<div class="form-grid">
+
+
+<!-- NAME -->
+
+<div class="form-group">
+
+<label>
+    Full Name *
+</label>
+
+<input
+    type="text"
+    id="name"
+    placeholder="Your full name"
+>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<label>
+    Email *
+</label>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Your email"
+>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label>
+    Phone *
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Your phone number"
+>
+
+</div>
+
+
+<!-- COLLEGE -->
+
+<div class="form-group">
+
+<label>
+    College / University *
+</label>
+
+<input
+    type="text"
+    id="college"
+    placeholder="College name"
+>
+
+</div>
+
+
+<!-- =========================
+     DEGREE DROPDOWN
+========================= -->
+
+<div class="form-group">
+
+<label>
+    Degree *
+</label>
+
+<select
+    id="degree"
+    onchange="updateBranches()"
+>
+
+<option value="">
+    Select Degree
+</option>
+
+<option value="B.Tech">
+    B.Tech
+</option>
+
+<option value="B.E">
+    B.E
+</option>
+
+<option value="B.Sc">
+    B.Sc
+</option>
+
+<option value="M.Tech">
+    M.Tech
+</option>
+
+<option value="M.Sc">
+    M.Sc
+</option>
+
+<option value="MBA">
+    MBA
+</option>
+
+<option value="Other">
+    Other
+</option>
+
+</select>
+
+</div>
+
+
+<!-- =========================
+     DYNAMIC BRANCH
+========================= -->
+
+<div class="form-group">
+
+<label>
+    Branch / Specialization *
+</label>
+
+<select id="branch">
+
+<option value="">
+    First select your degree
+</option>
+
+</select>
+
+</div>
+
+
+<!-- =========================
+     JOINING YEAR
+========================= -->
+
+<div class="form-group">
+
+<label>
+    College Joining Year *
+</label>
+
+<select id="joiningYear">
+
+<option value="">
+    Select Year
+</option>
+
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+
+</select>
+
+</div>
+
+
+<!-- =========================
+     GRADUATION YEAR
+========================= -->
+
+<div class="form-group">
+
+<label>
+    Graduation Year *
+</label>
+
+<select id="graduation">
+
+<option value="">
+    Select Year
+</option>
+
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2031">2031</option>
+<option value="2032">2032</option>
+
+</select>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div class="form-group">
+
+<label>
+    Preferred Location *
+</label>
+
+<input
+    type="text"
+    id="location"
+    placeholder="Example: Hyderabad"
+>
+
+</div>
+
+
+<!-- LINKEDIN -->
+
+<div class="form-group">
+
+<label>
+    LinkedIn (Optional)
+</label>
+
+<input
+    type="text"
+    id="linkedin"
+    placeholder="LinkedIn profile"
+>
+
+</div>
+
+
+<!-- GITHUB -->
+
+<div class="form-group">
+
+<label>
+    GitHub (Optional)
+</label>
+
+<input
+    type="text"
+    id="github"
+    placeholder="GitHub profile"
+>
+
+</div>
+
+</div>
+
+
+<div class="wizard-buttons">
+
+<button
+    class="back-btn"
+    onclick="showStep(2)"
+>
+    Back
+</button>
+
+<button
+    class="next-btn"
+    onclick="analyzeProfile()"
+>
+    Find My Jobs 🚀
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ANALYSIS PAGE
+========================= -->
+
+<section
+    id="analysisPage"
+    class="page hidden"
+>
+
+<div class="analysis">
+
+<div class="analysis-spinner"></div>
+
+<h2>
+    AI is analyzing your profile...
+</h2>
+
+<p style="color:#6b7280;margin-top:10px;">
+    Finding jobs that match your skills and career goals
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     RESULTS PAGE
+========================= -->
+
+<section
+    id="resultsPage"
+    class="page hidden"
+>
+
+<div class="results-container">
+
+
+<div class="profile-summary">
+
+<h2>
+    Your Career Profile
+</h2>
+
+
+<div class="summary-grid">
+
+
+<div class="summary-item">
+
+<small>
+    Career Goal
+</small>
+
+<strong id="summaryCareer">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Degree
+</small>
+
+<strong id="summaryDegree">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Branch
+</small>
+
+<strong id="summaryBranch">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Technologies
+</small>
+
+<strong id="summaryStreams">
+    -
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<h2 style="margin-bottom:20px;">
+    Recommended Jobs 🎯
+</h2>
+
+
+<div
+    class="job-grid"
+    id="jobList"
+>
+</div>
+
+
+<div
+    id="noJobs"
+    class="profile-summary hidden"
+    style="text-align:center;"
+>
+
+<h3>
+    No exact matches found
+</h3>
+
+<p style="color:#6b7280;margin-top:8px;">
+    We found some other opportunities that may be useful.
+</p>
+
+</div>
+
+
+<div
+    class="profile-summary"
+    style="margin-top:25px;"
+>
+
+<h2>
+    Skills To Improve 📚
+</h2>
+
+<div
+    id="skillsToImprove"
+    style="margin-top:15px;"
+>
+</div>
+
+</div>
+
+
+<div class="profile-summary">
+
+<h2>
+    Career Advice 🎯
+</h2>
+
+<p
+    id="careerAdvice"
+    style="
+    color:#6b7280;
+    line-height:1.8;
+    margin-top:12px;
+    "
+>
+</p>
+
+</div>
+
+
+<button
+    class="primary-btn"
+    style="max-width:300px;"
+    onclick="showReport()"
+>
+    View Career Report
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     JOB MODAL
+========================= -->
+
+<div
+    id="jobModal"
+    class="modal hidden"
+>
+
+<div class="modal-card">
+
+
+<div class="modal-header">
+
+<div>
+
+<h2 id="modalTitle">
+    Job Title
+</h2>
+
+<p
+    id="modalCompany"
+    class="company"
+>
+</p>
+
+</div>
+
+
+<button
+    class="close"
+    onclick="closeJobModal()"
+>
+    ×
+</button>
+
+</div>
+
+
+<div
+    id="modalDetails"
+    class="job-info"
+>
+</div>
+
+
+<div class="why-box">
+
+<h4>
+    Why This Job? 💡
+</h4>
+
+
+<p style="color:#6b7280;margin-bottom:10px;">
+    Your matched skills:
+</p>
+
+<div id="matchedSkills">
+</div>
+
+
+<p
+    style="
+    color:#6b7280;
+    margin-top:15px;
+    margin-bottom:10px;
+    "
+>
+    Skills to improve:
+</p>
+
+<div id="missingSkills">
+</div>
+
+</div>
+
+
+<button
+    class="primary-btn"
+    style="margin-top:22px;"
+    onclick="applyNow()"
+>
+    Apply Now 🚀
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     SUCCESS PAGE
+========================= -->
+
+<section
+    id="successPage"
+    class="page hidden"
+>
+
+<div class="success-card">
+
+<div class="success-icon">
+    ✓
+</div>
+
+
+<h1>
+    Application Submitted!
+</h1>
+
+
+<p
+    style="
+    color:#6b7280;
+    margin-top:12px;
+    line-height:1.6;
+    "
+>
+    Your application has been successfully submitted.
+</p>
+
+
+<div
+    style="
+    margin-top:25px;
+    background:#f9fafb;
+    padding:20px;
+    border-radius:12px;
+    text-align:left;
+    "
+>
+
+<p>
+
+<b>
+    Job:
+</b>
+
+<span id="successJob">
+</span>
+
+</p>
+
+
+<p style="margin-top:8px;">
+
+<b>
+    Company:
+</b>
+
+<span id="successCompany">
+</span>
+
+</p>
+
+
+<p style="margin-top:8px;">
+
+<b>
+    Status:
+</b>
+
+<span
+    style="
+    color:#15803d;
+    font-weight:bold;
+    "
+>
+    Applied
+</span>
+
+</p>
+
+</div>
+
+
+<div
+    class="email-message"
+    id="emailMessage"
+>
+    Preparing confirmation email...
+</div>
+
+
+<button
+    class="primary-btn"
+    style="margin-top:20px;"
+    onclick="showReport()"
+>
+    View Career Report
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     REPORT PAGE
+========================= -->
+
+<section
+    id="reportPage"
+    class="page hidden"
+>
+
+<div class="results-container">
+
+<div class="profile-summary">
+
+<h1>
+    Career Report 📊
+</h1>
+
+<p style="color:#6b7280;margin-top:8px;">
+    Your personalized CareerConnect AI report
+</p>
+
+
+<hr
+    style="
+    margin:25px 0;
+    border:none;
+    border-top:1px solid #e5e7eb;
+    "
+>
+
+
+<div class="summary-grid">
+
+
+<div class="summary-item">
+
+<small>
+    Name
+</small>
+
+<strong id="reportName">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Degree
+</small>
+
+<strong id="reportDegree">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Branch
+</small>
+
+<strong id="reportBranch">
+    -
+</strong>
+
+</div>
+
+
+<div class="summary-item">
+
+<small>
+    Graduation
+</small>
+
+<strong id="reportGraduation">
+    -
+</strong>
+
+</div>
+
+</div>
+
+
+<div style="margin-top:25px;">
+
+<h3>
+    Selected Technologies
+</h3>
+
+<p
+    id="reportStreams"
+    style="
+    color:#6b7280;
+    margin-top:8px;
+    "
+>
+</p>
+
+</div>
+
+
+<div style="margin-top:25px;">
+
+<h3>
+    Recommended Career
+</h3>
+
+<p
+    id="reportCareer"
+    style="
+    color:#6b7280;
+    margin-top:8px;
+    line-height:1.7;
+    "
+>
+</p>
+
+</div>
+
+
+<div style="margin-top:25px;">
+
+<h3>
+    Skills To Improve
+</h3>
+
+<div
+    id="reportSkills"
+    style="margin-top:10px;"
+>
+</div>
+
+</div>
+
+
+<button
+    class="primary-btn"
+    style="margin-top:30px;"
+    onclick="sendCareerReport()"
+>
+    Send My Report 📧
+</button>
+
+
+<div
+    id="reportEmailMessage"
+    class="email-message hidden"
+>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+CareerConnect AI © 2026
+
+<br>
+
+Your Skills. Your Career. Your Opportunity.
+
+</footer>
+
+
+<script>
+
+
+/* =====================================================
+   EMAILJS
+===================================================== */
+
+const EMAILJS_PUBLIC_KEY =
+    "YOUR_PUBLIC_KEY";
+
+const EMAILJS_SERVICE_ID =
+    "YOUR_SERVICE_ID";
+
+const EMAILJS_TEMPLATE_ID =
+    "YOUR_TEMPLATE_ID";
+
+
+if(
+    EMAILJS_PUBLIC_KEY !==
+    "YOUR_PUBLIC_KEY"
+){
+
+    emailjs.init({
+        publicKey:
+            EMAILJS_PUBLIC_KEY
+    });
+
+}
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+let user = {
+
+    email:"",
+    password:"",
+    name:"",
+    phone:"",
+    college:"",
+    degree:"",
+    branch:"",
+    joiningYear:"",
+    graduation:"",
+    location:"",
+    linkedin:"",
+    github:"",
+    careerMode:"",
+    resume:"",
+    jobType:"",
+    streams:[]
+
+};
+
+
+let selectedJob = null;
+
+
+/* =====================================================
+   PASSWORD VALIDATION
+===================================================== */
+
+function validatePassword(password){
+
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    return regex.test(password);
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    if(
+        !email ||
+        !password
+    ){
+
+        alert(
+            "Please enter email and password."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !validatePassword(password)
+    ){
+
+        alert(
+            "Password must contain at least 8 characters, " +
+            "one uppercase letter, one lowercase letter, " +
+            "one number and one symbol."
+        );
+
+        return;
+
+    }
+
+
+    user.email =
+        email;
+
+    user.password =
+        password;
+
+
+    showLoginLoading();
+
+}
+
+
+/* =====================================================
+   LOGIN LOADING
+===================================================== */
+
+function showLoginLoading(){
+
+    const loginBox =
+        document.getElementById(
+            "loginBox"
+        );
+
+
+    loginBox.innerHTML = `
+
+        <div class="login-loading">
+
+            <div class="login-spinner"></div>
+
+            <h2>
+                Signing you in...
+            </h2>
+
+            <p
+                style="
+                color:#6b7280;
+                margin-top:8px;
+                "
+            >
+                Checking your details
+            </p>
+
+        </div>
+
+    `;
+
+
+    setTimeout(
+        function(){
+
+            showLoginSuccess();
+
+        },
+        2000
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN SUCCESS
+===================================================== */
+
+function showLoginSuccess(){
+
+    const loginBox =
+        document.getElementById(
+            "loginBox"
+        );
+
+
+    loginBox.innerHTML = `
+
+        <div class="login-loading">
+
+            <div class="login-success-icon">
+                ✓
+            </div>
+
+            <h2
+                style="
+                color:#16834d;
+                "
+            >
+                Login Successful!
+            </h2>
+
+            <p
+                style="
+                color:#6b7280;
+                margin-top:8px;
+                "
+            >
+                Welcome to CareerConnect AI
+            </p>
+
+        </div>
+
+    `;
+
+
+    setTimeout(
+        function(){
+
+            document
+                .getElementById("navUser")
+                .textContent =
+                user.email;
+
+            showApp();
+
+        },
+        1500
+    );
+
+}
+
+
+/* =====================================================
+   DEMO LOGIN
+===================================================== */
+
+function demoLogin(){
+
+    user.email =
+        "arjun.kumar@example.com";
+
+    user.password =
+        "Career@123";
+
+    showLoginLoading();
+
+}
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function hideAllPages(){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            function(page){
+
+                page.classList.add(
+                    "hidden"
+                );
+
+            }
+        );
+
+}
+
+
+function showApp(){
+
+    hideAllPages();
+
+    document
+        .getElementById("homePage")
+        .classList.remove(
+            "hidden"
+        );
+
+}
+
+
+function selectCareer(mode){
+
+    user.careerMode =
+        mode;
+
+    hideAllPages();
+
+    document
+        .getElementById("wizardPage")
+        .classList.remove(
+            "hidden"
+        );
+
+    showStep(1);
+
+}
+
+
+/* =====================================================
+   WIZARD
+===================================================== */
+
+function showStep(step){
+
+    document
+        .getElementById("step1")
+        .classList.add("hidden");
+
+    document
+        .getElementById("step2")
+        .classList.add("hidden");
+
+    document
+        .getElementById("step3")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(
+            "step" + step
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+
+    for(
+        let i = 1;
+        i <= 3;
+        i++
+    ){
+
+        document
+            .getElementById(
+                "p" + i
+            )
+            .classList.remove(
+                "active"
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "p" + step
+        )
+        .classList.add(
+            "active"
+        );
+
+}
+
+
+/* =====================================================
+   WIZARD NEXT
+===================================================== */
+
+function nextStep(currentStep){
+
+    if(
+        currentStep === 1
+    ){
+
+        const file =
+            document
+            .getElementById("resume")
+            .files[0];
+
+
+        if(!file){
+
+            alert(
+                "Please upload your resume first."
+            );
+
+            return;
+
+        }
+
+
+        user.resume =
+            file.name;
+
+
+        showStep(2);
+
+    }
+
+
+    else if(
+        currentStep === 2
+    ){
+
+        const selectedType =
+            document.querySelector(
+                'input[name="jobType"]:checked'
+            );
+
+
+        const selectedStreams =
+            getSelectedStreams();
+
+
+        if(!selectedType){
+
+            alert(
+                "Please select an opportunity type."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            selectedStreams.length === 0
+        ){
+
+            alert(
+                "Please select at least one technology or stream."
+            );
+
+            return;
+
+        }
+
+
+        user.jobType =
+            selectedType.value;
+
+
+        user.streams =
+            selectedStreams;
+
+
+        showStep(3);
+
+    }
+
+}
+
+
+/* =====================================================
+   MULTIPLE TECHNOLOGY
+===================================================== */
+
+function getSelectedStreams(){
+
+    return Array
+        .from(
+            document.querySelectorAll(
+                'input[name="stream"]:checked'
+            )
+        )
+        .map(
+            function(input){
+
+                return input.value;
+
+            }
+        );
+
+}
+
+
+function updateStreamSelection(){
+
+    const selected =
+        getSelectedStreams();
+
+
+    const container =
+        document.getElementById(
+            "selectedStreams"
+        );
+
+
+    if(
+        selected.length === 0
+    ){
+
+        container.innerHTML =
+            "None selected";
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        selected
+        .map(
+            function(stream){
+
+                return `
+
+                    <span class="stream-tag">
+                        ${stream}
+                    </span>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =====================================================
+   RESUME
+===================================================== */
+
+document
+    .getElementById("resume")
+    .addEventListener(
+        "change",
+        function(){
+
+            const file =
+                this.files[0];
+
+
+            if(file){
+
+                document
+                    .getElementById(
+                        "resumeName"
+                    )
+                    .textContent =
+                    "Selected: " +
+                    file.name;
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   DYNAMIC DEGREE → BRANCH
+===================================================== */
+
+function updateBranches(){
+
+    const degree =
+        document
+        .getElementById("degree")
+        .value;
+
+
+    const branch =
+        document
+        .getElementById("branch");
+
+
+    branch.innerHTML = "";
+
+
+    if(
+        degree === ""
+    ){
+
+        branch.innerHTML = `
+
+            <option value="">
+                First select your degree
+            </option>
+
+        `;
+
+        return;
+
+    }
+
+
+    let branches = [];
+
+
+    /* =========================
+       B.TECH
+    ========================= */
+
+    if(
+        degree === "B.Tech"
+    ){
+
+        branches = [
+
+            "Computer Science and Engineering",
+
+            "CSE (AI & ML)",
+
+            "CSE (Data Science)",
+
+            "Artificial Intelligence",
+
+            "Artificial Intelligence & Data Science",
+
+            "Information Technology",
+
+            "Cyber Security",
+
+            "Electronics and Communication Engineering",
+
+            "Electrical and Electronics Engineering",
+
+            "Electrical Engineering",
+
+            "Electronics Engineering",
+
+            "Mechanical Engineering",
+
+            "Civil Engineering",
+
+            "Chemical Engineering",
+
+            "Biotechnology",
+
+            "Aerospace Engineering",
+
+            "Automobile Engineering",
+
+            "Aeronautical Engineering",
+
+            "Industrial Engineering",
+
+            "Production Engineering",
+
+            "Mechatronics Engineering",
+
+            "Agricultural Engineering",
+
+            "Food Technology",
+
+            "Biomedical Engineering",
+
+            "Environmental Engineering",
+
+            "Mining Engineering",
+
+            "Petroleum Engineering",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       B.E
+    ========================= */
+
+    else if(
+        degree === "B.E"
+    ){
+
+        branches = [
+
+            "Computer Science and Engineering",
+
+            "Information Technology",
+
+            "Artificial Intelligence",
+
+            "Artificial Intelligence & Data Science",
+
+            "Data Science",
+
+            "Cyber Security",
+
+            "Electronics and Communication Engineering",
+
+            "Electrical and Electronics Engineering",
+
+            "Electrical Engineering",
+
+            "Mechanical Engineering",
+
+            "Civil Engineering",
+
+            "Chemical Engineering",
+
+            "Biotechnology",
+
+            "Aerospace Engineering",
+
+            "Automobile Engineering",
+
+            "Aeronautical Engineering",
+
+            "Industrial Engineering",
+
+            "Production Engineering",
+
+            "Mechatronics Engineering",
+
+            "Biomedical Engineering",
+
+            "Environmental Engineering",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       B.SC
+    ========================= */
+
+    else if(
+        degree === "B.Sc"
+    ){
+
+        branches = [
+
+            "Computer Science",
+
+            "Information Technology",
+
+            "Data Science",
+
+            "Artificial Intelligence",
+
+            "Computer Applications",
+
+            "Mathematics",
+
+            "Physics",
+
+            "Chemistry",
+
+            "Statistics",
+
+            "Biotechnology",
+
+            "Microbiology",
+
+            "Biochemistry",
+
+            "Botany",
+
+            "Zoology",
+
+            "Electronics",
+
+            "Geology",
+
+            "Environmental Science",
+
+            "Psychology",
+
+            "Agriculture",
+
+            "Food Science",
+
+            "Nutrition",
+
+            "Forensic Science",
+
+            "Bioinformatics",
+
+            "Geography",
+
+            "Economics",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       M.TECH
+    ========================= */
+
+    else if(
+        degree === "M.Tech"
+    ){
+
+        branches = [
+
+            "Computer Science and Engineering",
+
+            "Artificial Intelligence",
+
+            "Machine Learning",
+
+            "Data Science",
+
+            "Software Engineering",
+
+            "Information Technology",
+
+            "Cyber Security",
+
+            "Cloud Computing",
+
+            "Artificial Intelligence & Data Science",
+
+            "Electronics and Communication Engineering",
+
+            "VLSI Design",
+
+            "Embedded Systems",
+
+            "Communication Systems",
+
+            "Electrical Engineering",
+
+            "Power Systems",
+
+            "Power Electronics",
+
+            "Mechanical Engineering",
+
+            "Thermal Engineering",
+
+            "Machine Design",
+
+            "Civil Engineering",
+
+            "Structural Engineering",
+
+            "Environmental Engineering",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       M.SC
+    ========================= */
+
+    else if(
+        degree === "M.Sc"
+    ){
+
+        branches = [
+
+            "Computer Science",
+
+            "Information Technology",
+
+            "Data Science",
+
+            "Artificial Intelligence",
+
+            "Mathematics",
+
+            "Physics",
+
+            "Chemistry",
+
+            "Statistics",
+
+            "Biotechnology",
+
+            "Microbiology",
+
+            "Biochemistry",
+
+            "Botany",
+
+            "Zoology",
+
+            "Electronics",
+
+            "Bioinformatics",
+
+            "Environmental Science",
+
+            "Forensic Science",
+
+            "Geology",
+
+            "Psychology",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       MBA
+    ========================= */
+
+    else if(
+        degree === "MBA"
+    ){
+
+        branches = [
+
+            "Finance",
+
+            "Marketing",
+
+            "Human Resources",
+
+            "Business Analytics",
+
+            "Information Technology",
+
+            "Operations",
+
+            "International Business",
+
+            "Healthcare Management",
+
+            "Entrepreneurship",
+
+            "Supply Chain Management",
+
+            "Digital Marketing",
+
+            "Banking and Finance",
+
+            "Business Management",
+
+            "Retail Management",
+
+            "Project Management",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    /* =========================
+       OTHER
+    ========================= */
+
+    else if(
+        degree === "Other"
+    ){
+
+        branches = [
+
+            "General",
+
+            "Computer Science",
+
+            "Information Technology",
+
+            "Management",
+
+            "Science",
+
+            "Engineering",
+
+            "Arts",
+
+            "Commerce",
+
+            "Education",
+
+            "Other"
+
+        ];
+
+    }
+
+
+    branch.innerHTML = `
+
+        <option value="">
+            Select Branch / Specialization
+        </option>
+
+    `;
+
+
+    branches.forEach(
+        function(item){
+
+            branch.innerHTML += `
+
+                <option value="${item}">
+                    ${item}
+                </option>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   JOB DATA
+===================================================== */
+
+const jobs = [
+
+{
+
+title:"Python Developer",
+
+company:"TechNova Solutions",
+
+type:"Full-time",
+
+stream:"Python",
+
+location:"Hyderabad",
+
+match:94,
+
+skills:[
+    "Python",
+    "Django",
+    "SQL",
+    "REST API"
+],
+
+missing:[
+    "Docker"
+],
+
+description:
+"Work with the development team to build Python backend applications, APIs and business solutions."
+
+},
+
+
+{
+
+title:"Python Intern",
+
+company:"CodeWorks",
+
+type:"Internship",
+
+stream:"Python",
+
+location:"Bangalore",
+
+match:91,
+
+skills:[
+    "Python",
+    "Git",
+    "SQL"
+],
+
+missing:[
+    "Django"
+],
+
+description:
+"Join our development team and gain practical experience building Python applications."
+
+},
+
+
+{
+
+title:"Backend Developer",
+
+company:"CloudByte",
+
+type:"Full-time",
+
+stream:"Python",
+
+location:"Bangalore",
+
+match:88,
+
+skills:[
+    "Python",
+    "SQL",
+    "REST API"
+],
+
+missing:[
+    "AWS"
+],
+
+description:
+"Develop backend services and APIs for scalable cloud applications."
+
+},
+
+
+{
+
+title:"Java Developer",
+
+company:"InnoTech",
+
+type:"Full-time",
+
+stream:"Java",
+
+location:"Hyderabad",
+
+match:93,
+
+skills:[
+    "Java",
+    "Spring Boot",
+    "SQL"
+],
+
+missing:[
+    "Docker"
+],
+
+description:
+"Build enterprise applications using Java and Spring Boot."
+
+},
+
+
+{
+
+title:"Java Intern",
+
+company:"NextGen Labs",
+
+type:"Internship",
+
+stream:"Java",
+
+location:"Chennai",
+
+match:89,
+
+skills:[
+    "Java",
+    "OOP",
+    "SQL"
+],
+
+missing:[
+    "Spring Boot"
+],
+
+description:
+"Learn professional Java development while working with an experienced engineering team."
+
+},
+
+
+{
+
+title:"Frontend Developer",
+
+company:"PixelSoft",
+
+type:"Full-time",
+
+stream:"Web Development",
+
+location:"Bangalore",
+
+match:95,
+
+skills:[
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React"
+],
+
+missing:[
+    "TypeScript"
+],
+
+description:
+"Create responsive and modern web applications for customers."
+
+},
+
+
+{
+
+title:"Frontend Intern",
+
+company:"DesignStack",
+
+type:"Internship",
+
+stream:"Web Development",
+
+location:"Hyderabad",
+
+match:92,
+
+skills:[
+    "HTML",
+    "CSS",
+    "JavaScript"
+],
+
+missing:[
+    "React"
+],
+
+description:
+"Work with designers and developers to create attractive web experiences."
+
+},
+
+
+{
+
+title:"AI/ML Intern",
+
+company:"AI Labs India",
+
+type:"Internship",
+
+stream:"AI/ML",
+
+location:"Bangalore",
+
+match:96,
+
+skills:[
+    "Python",
+    "Machine Learning",
+    "Pandas",
+    "NumPy"
+],
+
+missing:[
+    "Deep Learning"
+],
+
+description:
+"Work on machine learning projects and real-world AI solutions."
+
+},
+
+
+{
+
+title:"C++ Developer",
+
+company:"CoreTech",
+
+type:"Full-time",
+
+stream:"C++",
+
+location:"Pune",
+
+match:90,
+
+skills:[
+    "C++",
+    "OOP",
+    "DSA"
+],
+
+missing:[
+    "Linux"
+],
+
+description:
+"Develop high-performance software using C++ and modern development practices."
+
+}
+
+];
+
+
+/* =====================================================
+   ANALYZE PROFILE
+===================================================== */
+
+function analyzeProfile(){
+
+    user.name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    user.email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    user.phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
+
+
+    user.college =
+        document
+        .getElementById("college")
+        .value
+        .trim();
+
+
+    user.degree =
+        document
+        .getElementById("degree")
+        .value;
+
+
+    user.branch =
+        document
+        .getElementById("branch")
+        .value;
+
+
+    user.joiningYear =
+        document
+        .getElementById("joiningYear")
+        .value;
+
+
+    user.graduation =
+        document
+        .getElementById("graduation")
+        .value;
+
+
+    user.location =
+        document
+        .getElementById("location")
+        .value
+        .trim();
+
+
+    user.linkedin =
+        document
+        .getElementById("linkedin")
+        .value
+        .trim();
+
+
+    user.github =
+        document
+        .getElementById("github")
+        .value
+        .trim();
+
+
+    if(
+
+        !user.name ||
+
+        !user.email ||
+
+        !user.phone ||
+
+        !user.college ||
+
+        !user.degree ||
+
+        !user.branch ||
+
+        !user.joiningYear ||
+
+        !user.graduation ||
+
+        !user.location
+
+    ){
+
+        alert(
+            "Please fill all required fields."
+        );
+
+        return;
+
+    }
+
+
+    if(
+
+        Number(user.graduation)
+        <=
+        Number(user.joiningYear)
+
+    ){
+
+        alert(
+            "Graduation year must be after joining year."
+        );
+
+        return;
+
+    }
+
+
+    hideAllPages();
+
+
+    document
+        .getElementById("analysisPage")
+        .classList
+        .remove("hidden");
+
+
+    setTimeout(
+        function(){
+
+            showResults();
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   JOB MATCHING
+===================================================== */
+
+function getRecommendedJobs(){
+
+    let matchedJobs =
+        jobs.filter(
+            function(job){
+
+                const streamMatch =
+                    user.streams.includes(
+                        "Not Sure"
+                    ) ||
+
+                    user.streams.includes(
+                        job.stream
+                    );
+
+
+                const typeMatch =
+                    user.jobType === "Any" ||
+
+                    user.jobType ===
+                    job.type;
+
+
+                return (
+                    streamMatch &&
+                    typeMatch
+                );
+
+            }
+        );
+
+
+    if(
+        matchedJobs.length === 0
+    ){
+
+        matchedJobs =
+            jobs.filter(
+                function(job){
+
+                    return (
+
+                        user.streams.includes(
+                            "Not Sure"
+                        ) ||
+
+                        user.streams.includes(
+                            job.stream
+                        )
+
+                    );
+
+                }
+            );
+
+    }
+
+
+    if(
+        matchedJobs.length === 0
+    ){
+
+        matchedJobs =
+            jobs;
+
+    }
+
+
+    return matchedJobs;
+
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+function showResults(){
+
+    hideAllPages();
+
+
+    document
+        .getElementById("resultsPage")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("summaryCareer")
+        .textContent =
+        user.careerMode;
+
+
+    document
+        .getElementById("summaryDegree")
+        .textContent =
+        user.degree;
+
+
+    document
+        .getElementById("summaryBranch")
+        .textContent =
+        user.branch;
+
+
+    document
+        .getElementById("summaryStreams")
+        .textContent =
+        user.streams.join(", ");
+
+
+    const recommendedJobs =
+        getRecommendedJobs();
+
+
+    const jobList =
+        document.getElementById(
+            "jobList"
+        );
+
+
+    jobList.innerHTML =
+        "";
+
+
+    recommendedJobs
+        .sort(
+            function(a,b){
+
+                return b.match - a.match;
+
+            }
+        )
+        .forEach(
+            function(job){
+
+                jobList.innerHTML += `
+
+                    <div class="job-card">
+
+                        <div class="job-top">
+
+                            <div>
+
+                                <h3>
+                                    ${job.title}
+                                </h3>
+
+                                <p class="company">
+                                    ${job.company}
+                                </p>
+
+                            </div>
+
+                            <div class="match">
+                                ${job.match}% Match
+                            </div>
+
+                        </div>
+
+
+                        <div class="job-info">
+
+                            📍 ${job.location}
+
+                            <br>
+
+                            💼 ${job.type}
+
+                            <br>
+
+                            🧠 ${job.stream}
+
+                        </div>
+
+
+                        <p
+                            style="
+                            color:#6b7280;
+                            line-height:1.6;
+                            margin-bottom:18px;
+                            "
+                        >
+                            ${job.description}
+                        </p>
+
+
+                        <div class="job-buttons">
+
+                            <button
+                                class="small-btn"
+                                onclick="
+                                viewJob(${jobs.indexOf(job)})
+                                "
+                            >
+                                View Job
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+    createSkills();
+
+
+    document
+        .getElementById("careerAdvice")
+        .textContent =
+        getCareerAdvice();
+
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+function createSkills(){
+
+    let skills = [];
+
+
+    user.streams.forEach(
+        function(stream){
+
+            if(
+                stream === "Python"
+            ){
+
+                skills.push(
+                    "Django",
+                    "REST APIs",
+                    "Docker",
+                    "AWS"
+                );
+
+            }
+
+
+            if(
+                stream === "Java"
+            ){
+
+                skills.push(
+                    "Spring Boot",
+                    "REST APIs",
+                    "Docker",
+                    "Microservices"
+                );
+
+            }
+
+
+            if(
+                stream === "Web Development"
+            ){
+
+                skills.push(
+                    "React",
+                    "TypeScript",
+                    "Node.js",
+                    "Responsive Design"
+                );
+
+            }
+
+
+            if(
+                stream === "AI/ML"
+            ){
+
+                skills.push(
+                    "Deep Learning",
+                    "TensorFlow",
+                    "PyTorch",
+                    "Model Deployment"
+                );
+
+            }
+
+
+            if(
+                stream === "C++"
+            ){
+
+                skills.push(
+                    "Linux",
+                    "STL",
+                    "System Design",
+                    "Multithreading"
+                );
+
+            }
+
+
+            if(
+                stream === "Not Sure"
+            ){
+
+                skills.push(
+                    "Git",
+                    "SQL",
+                    "Cloud",
+                    "Communication"
+                );
+
+            }
+
+        }
+    );
+
+
+    if(
+        skills.length === 0
+    ){
+
+        skills = [
+
+            "Git",
+            "SQL",
+            "Cloud",
+            "Communication"
+
+        ];
+
+    }
+
+
+    skills =
+        [...new Set(skills)];
+
+
+    document
+        .getElementById(
+            "skillsToImprove"
+        )
+        .innerHTML =
+
+        skills
+        .slice(0,8)
+        .map(
+            function(skill){
+
+                return `
+
+                    <span class="skill missing">
+                        ${skill}
+                    </span>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =====================================================
+   CAREER ADVICE
+===================================================== */
+
+function getCareerAdvice(){
+
+    const streams =
+        user.streams;
+
+
+    if(
+
+        streams.includes("Python") &&
+
+        streams.includes("AI/ML")
+
+    ){
+
+        return `
+        Your combination of Python and AI/ML is a strong
+        career direction. You can explore Python Developer,
+        Backend Developer, Data Analyst and AI/ML roles.
+        Focus on machine learning, deep learning, APIs
+        and model deployment. Building 2–3 strong projects
+        will improve your profile.
+        `;
+
+    }
+
+
+    if(
+        streams.includes("Python")
+    ){
+
+        return `
+        Python is useful for backend development, data
+        analysis and AI. Focus on Python, SQL, Django or
+        FastAPI, REST APIs and Git. Build practical projects
+        to improve your profile.
+        `;
+
+    }
+
+
+    if(
+        streams.includes("Java")
+    ){
+
+        return `
+        Java is widely used for backend and enterprise
+        software. Focus on Java, OOP, SQL, Spring Boot,
+        REST APIs and Git. Building a Spring Boot project
+        can make your profile stronger.
+        `;
+
+    }
+
+
+    if(
+        streams.includes("Web Development")
+    ){
+
+        return `
+        Web development is a strong career option.
+        Improve HTML, CSS and JavaScript first, then learn
+        React, responsive design and basic backend concepts.
+        Create real websites for your portfolio.
+        `;
+
+    }
+
+
+    if(
+        streams.includes("C++")
+    ){
+
+        return `
+        C++ is useful for software development and
+        performance-focused applications. Improve DSA,
+        OOP, STL, Linux and problem solving. Practice coding
+        regularly and build technical projects.
+        `;
+
+    }
+
+
+    return `
+    Start by understanding your strongest skills.
+    Improve programming, SQL, Git and communication.
+    Build practical projects and apply for internships
+    or entry-level opportunities to gain experience.
+    `;
+
+}
+
+
+/* =====================================================
+   VIEW JOB
+===================================================== */
+
+function viewJob(index){
+
+    selectedJob =
+        jobs[index];
+
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+        selectedJob.title;
+
+
+    document
+        .getElementById("modalCompany")
+        .textContent =
+
+        selectedJob.company +
+        " • " +
+        selectedJob.location;
+
+
+    document
+        .getElementById("modalDetails")
+        .innerHTML = `
+
+        <b>
+            Opportunity:
+        </b>
+
+        ${selectedJob.type}
+
+        <br><br>
+
+        <b>
+            Technology:
+        </b>
+
+        ${selectedJob.stream}
+
+        <br><br>
+
+        <b>
+            Match Score:
+        </b>
+
+        ${selectedJob.match}%
+
+        <br><br>
+
+        ${selectedJob.description}
+
+    `;
+
+
+    document
+        .getElementById("matchedSkills")
+        .innerHTML =
+
+        selectedJob.skills
+        .map(
+            function(skill){
+
+                return `
+
+                    <span class="skill good">
+                        ✓ ${skill}
+                    </span>
+
+                `;
+
+            }
+        )
+        .join("");
+
+
+    document
+        .getElementById("missingSkills")
+        .innerHTML =
+
+        selectedJob.missing
+        .map(
+            function(skill){
+
+                return `
+
+                    <span class="skill missing">
+                        📚 ${skill}
+                    </span>
+
+                `;
+
+            }
+        )
+        .join("");
+
+
+    document
+        .getElementById("jobModal")
+        .classList
+        .remove("hidden");
+
+}
+
+
+function closeJobModal(){
+
+    document
+        .getElementById("jobModal")
+        .classList
+        .add("hidden");
+
+}
+
+
+/* =====================================================
+   APPLY
+===================================================== */
+
+function applyNow(){
+
+    if(!selectedJob){
+
+        return;
+
+    }
+
+
+    closeJobModal();
+
+
+    document
+        .getElementById("successJob")
+        .textContent =
+        selectedJob.title;
+
+
+    document
+        .getElementById("successCompany")
+        .textContent =
+        selectedJob.company;
+
+
+    hideAllPages();
+
+
+    document
+        .getElementById("successPage")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("emailMessage")
+        .innerHTML =
+        "Sending confirmation email...";
+
+
+    sendApplicationEmail();
+
+}
+
+
+/* =====================================================
+   APPLICATION EMAIL
+===================================================== */
+
+function sendApplicationEmail(){
+
+    if(
+
+        EMAILJS_PUBLIC_KEY ===
+        "YOUR_PUBLIC_KEY"
+
+        ||
+
+        EMAILJS_SERVICE_ID ===
+        "YOUR_SERVICE_ID"
+
+        ||
+
+        EMAILJS_TEMPLATE_ID ===
+        "YOUR_TEMPLATE_ID"
+
+    ){
+
+        document
+            .getElementById(
+                "emailMessage"
+            )
+            .innerHTML =
+
+            "⚠️ Email service is not configured yet. " +
+            "Add your EmailJS keys in the code.";
+
+        return;
+
+    }
+
+
+    const templateParams = {
+
+        to_email:
+            user.email,
+
+        candidate_name:
+            user.name || "Candidate",
+
+        job_title:
+            selectedJob.title,
+
+        company:
+            selectedJob.company,
+
+        match:
+            selectedJob.match + "%",
+
+        location:
+            selectedJob.location,
+
+        status:
+            "Applied",
+
+        message:
+            "Your application has been successfully submitted through CareerConnect AI."
+
+    };
+
+
+    emailjs.send(
+
+        EMAILJS_SERVICE_ID,
+
+        EMAILJS_TEMPLATE_ID,
+
+        templateParams
+
+    )
+
+    .then(
+        function(){
+
+            document
+                .getElementById(
+                    "emailMessage"
+                )
+                .innerHTML =
+
+                "✅ Confirmation email sent successfully to <b>" +
+                user.email +
+                "</b>.";
+
+        }
+    )
+
+    .catch(
+        function(error){
+
+            console.error(error);
+
+
+            document
+                .getElementById(
+                    "emailMessage"
+                )
+                .innerHTML =
+
+                "⚠️ Application submitted, but the email could not be sent. " +
+                "Please check your EmailJS configuration.";
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REPORT
+===================================================== */
+
+function showReport(){
+
+    hideAllPages();
+
+
+    document
+        .getElementById("reportPage")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("reportName")
+        .textContent =
+        user.name;
+
+
+    document
+        .getElementById("reportDegree")
+        .textContent =
+        user.degree;
+
+
+    document
+        .getElementById("reportBranch")
+        .textContent =
+        user.branch;
+
+
+    document
+        .getElementById("reportGraduation")
+        .textContent =
+        user.graduation;
+
+
+    document
+        .getElementById("reportStreams")
+        .textContent =
+        user.streams.join(", ");
+
+
+    document
+        .getElementById("reportCareer")
+        .textContent =
+        getCareerAdvice();
+
+
+    let skills = [];
+
+
+    user.streams.forEach(
+        function(stream){
+
+            if(
+                stream === "Python"
+            ){
+
+                skills.push(
+                    "Django",
+                    "REST APIs",
+                    "Docker",
+                    "AWS"
+                );
+
+            }
+
+
+            if(
+                stream === "Java"
+            ){
+
+                skills.push(
+                    "Spring Boot",
+                    "REST APIs",
+                    "Docker"
+                );
+
+            }
+
+
+            if(
+                stream === "Web Development"
+            ){
+
+                skills.push(
+                    "React",
+                    "TypeScript",
+                    "Node.js"
+                );
+
+            }
+
+
+            if(
+                stream === "AI/ML"
+            ){
+
+                skills.push(
+                    "Deep Learning",
+                    "TensorFlow",
+                    "PyTorch"
+                );
+
+            }
+
+
+            if(
+                stream === "C++"
+            ){
+
+                skills.push(
+                    "Linux",
+                    "STL",
+                    "System Design"
+                );
+
+            }
+
+        }
+    );
+
+
+    skills =
+        [...new Set(skills)];
+
+
+    document
+        .getElementById("reportSkills")
+        .innerHTML =
+
+        skills
+        .slice(0,8)
+        .map(
+            function(skill){
+
+                return `
+
+                    <span class="skill missing">
+                        ${skill}
+                    </span>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =====================================================
+   SEND REPORT
+===================================================== */
+
+function sendCareerReport(){
+
+    const message =
+        document.getElementById(
+            "reportEmailMessage"
+        );
+
+
+    message
+        .classList
+        .remove("hidden");
+
+
+    if(
+
+        EMAILJS_PUBLIC_KEY ===
+        "YOUR_PUBLIC_KEY"
+
+        ||
+
+        EMAILJS_SERVICE_ID ===
+        "YOUR_SERVICE_ID"
+
+        ||
+
+        EMAILJS_TEMPLATE_ID ===
+        "YOUR_TEMPLATE_ID"
+
+    ){
+
+        message.innerHTML =
+            "⚠️ Email service is not configured. " +
+            "Please add your EmailJS keys.";
+
+        return;
+
+    }
+
+
+    const templateParams = {
+
+        to_email:
+            user.email,
+
+        candidate_name:
+            user.name,
+
+        degree:
+            user.degree,
+
+        branch:
+            user.branch,
+
+        joining_year:
+            user.joiningYear,
+
+        graduation:
+            user.graduation,
+
+        technologies:
+            user.streams.join(", "),
+
+        career:
+            getCareerAdvice(),
+
+        message:
+            "Here is your personalized CareerConnect AI career report."
+
+    };
+
+
+    message.innerHTML =
+        "Sending your career report...";
+
+
+    emailjs.send(
+
+        EMAILJS_SERVICE_ID,
+
+        EMAILJS_TEMPLATE_ID,
+
+        templateParams
+
+    )
+
+    .then(
+        function(){
+
+            message.innerHTML =
+                "✅ Your career report has been sent to <b>" +
+                user.email +
+                "</b>.";
+
+        }
+    )
+
+    .catch(
+        function(error){
+
+            console.error(error);
+
+
+            message.innerHTML =
+                "⚠️ We could not send the report. " +
+                "Please check your EmailJS configuration.";
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
